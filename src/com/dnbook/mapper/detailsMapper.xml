@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dnbook.dao.detailsMapper">
+  <resultMap id="BaseResultMap" type="com.dnbook.entity.details">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bnum" jdbcType="INTEGER" property="bnum" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="totalprice" jdbcType="DOUBLE" property="totalprice" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="times" jdbcType="TIMESTAMP" property="times" />
+    <result column="bookname" jdbcType="VARCHAR" property="bookname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, bnum, price, totalprice, uname, times, bookname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from details
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from details
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dnbook.entity.details">
+    insert into details (id, bnum, price, 
+      totalprice, uname, times, 
+      bookname)
+    values (#{id,jdbcType=INTEGER}, #{bnum,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
+      #{totalprice,jdbcType=DOUBLE}, #{uname,jdbcType=VARCHAR}, #{times,jdbcType=TIMESTAMP}, 
+      #{bookname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dnbook.entity.details">
+    insert into details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bnum != null">
+        bnum,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="bookname != null">
+        bookname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bnum != null">
+        #{bnum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookname != null">
+        #{bookname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dnbook.entity.details">
+    update details
+    <set>
+      <if test="bnum != null">
+        bnum = #{bnum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookname != null">
+        bookname = #{bookname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dnbook.entity.details">
+    update details
+    set bnum = #{bnum,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      totalprice = #{totalprice,jdbcType=DOUBLE},
+      uname = #{uname,jdbcType=VARCHAR},
+      times = #{times,jdbcType=TIMESTAMP},
+      bookname = #{bookname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
